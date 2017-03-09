@@ -15,12 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.ichunming.bms.constant.ErrorCode;
-import com.ichunming.bms.constant.UserRole;
 import com.ichunming.bms.core.helper.MessageManager;
+import com.ichunming.bms.entity.BmsSessionInfo;
 import com.ichunming.bms.service.IBmsUserService;
 import com.ichunming.bms.vo.BaseResult;
 import com.ichunming.bms.vo.BmsUserForm;
-import com.ichunming.common.helper.SessionInfo;
 import com.ichunming.common.util.SessionUtil;
 import com.ichunming.common.util.StringUtil;
 
@@ -43,8 +42,8 @@ public class BmsUserController {
 		logger.debug("login request...");
 		
 		// check SessionInfo
-		SessionInfo sessionInfo = SessionUtil.getSessionInfo(request);
-		if(null != sessionInfo && null != sessionInfo.getRole()) {
+		BmsSessionInfo sessionInfo = (BmsSessionInfo) SessionUtil.getSessionInfo(request);
+		if(null != sessionInfo && null != sessionInfo.getUid()) {
 			// already login
 			logger.debug("already login.");
 			return "redirect:/home/index";
@@ -65,7 +64,7 @@ public class BmsUserController {
 			logger.debug("login success.");
 			// save SessionInfo
 			logger.debug("save session info...");
-			sessionInfo = new SessionInfo(UserRole.ADMIN.getCode(), userForm.getUsername(), null);
+			sessionInfo = new BmsSessionInfo("0", userForm.getUsername(), null);
 			SessionUtil.setSessionInfo(sessionInfo, request);
 			
 			// save cookie -- TODO

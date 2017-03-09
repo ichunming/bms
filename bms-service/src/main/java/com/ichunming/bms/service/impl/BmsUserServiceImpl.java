@@ -44,7 +44,7 @@ public class BmsUserServiceImpl implements IBmsUserService {
 		}
 
 		BaseResult result = new BaseResult(ErrorCode.SUCCESS);
-		result.setData(data);
+		//result.setData(data);
 		return result;
 	}
 }

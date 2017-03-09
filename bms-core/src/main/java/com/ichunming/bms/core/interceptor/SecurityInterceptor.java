@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.ichunming.bms.constant.SystemSettings;
+import com.ichunming.bms.core.helper.AgentHelper;
+import com.ichunming.bms.entity.BmsSessionInfo;
 import com.ichunming.common.helper.SessionInfo;
 import com.ichunming.common.util.SessionUtil;
 
@@ -28,8 +30,10 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object object) throws Exception {
 		SessionInfo sessionInfo = SessionUtil.getSessionInfo(request);
 		// DEBUG MODE
+		String agent = request.getHeader("user-agent");
+		logger.debug("agent:" + (AgentHelper.isPcDevice(agent) ? "PC" : "Mobile"));
 		if(SystemSettings.DEBUG_MODE) {
-			sessionInfo = new SessionInfo(1L, "", "");
+			sessionInfo = new BmsSessionInfo("0", "test", null);
 			
 			SessionUtil.setSessionInfo(sessionInfo, request);
 		}

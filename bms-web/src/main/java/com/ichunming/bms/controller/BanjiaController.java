@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/table")
-public class TableController {
-	private static final Logger logger = LoggerFactory.getLogger(TableController.class);
+@RequestMapping("/banjia")
+public class BanjiaController {
+	private static final Logger logger = LoggerFactory.getLogger(BanjiaController.class);
 	
 	@RequestMapping(value = "list", method = {RequestMethod.GET})
 	public String index() {

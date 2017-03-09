@@ -10,7 +10,7 @@
 <!-- start nav -->
 <div class="menu">
 	<ul>
-		<li><a href="/bms/table/list">数据管理</a></li>
+		<li><a href="/bms/banjia/list">85搬家</a></li>
 	</ul>
 </div>
 <!-- end nav -->
